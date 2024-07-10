@@ -3,7 +3,6 @@ import Head from "next/head";
 
 export const getStaticProps = async () => {
   const allPosts = await getAllPosts();
-  console.log(allPosts);
   return {
     props: {
       allPosts: allPosts,

@@ -12,5 +12,26 @@ export const getAllPosts = async () => {
     page_size: 100,
   });
   const allPosts = posts.results;
-  return allPosts;
+  return allPosts.map((post) => {
+    return getPagesMetaData(post);
+  });
+};
+
+const getPagesMetaData = (post: any) => {
+  const getTags = (tags: []) => {
+    const allTags: string[] = tags.map((tag: { name: string }) => {
+      return tag.name;
+    });
+    return allTags;
+  };
+
+  return {
+    id: post.id,
+    title: post.properties.Name.title[0].plain_text,
+    desctiption: post.properties.Description.rich_text[0].plain_text,
+    date: post.properties.Date.date.start,
+    slug: post.properties.Slug.rich_text[0].plain_text,
+    // tags: post.properties.Tag.multi_select,
+    tags: getTags(post.properties.Tag.multi_select),
+  };
 };
