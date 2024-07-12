@@ -17,7 +17,16 @@ export const getAllPosts = async () => {
   });
 };
 
-const getPagesMetaData = (post: any) => {
+const getPagesMetaData = (
+  post: any
+): {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  slug: string;
+  tags: string[];
+} => {
   const getTags = (tags: []) => {
     const allTags: string[] = tags.map((tag: { name: string }) => {
       return tag.name;
@@ -31,7 +40,6 @@ const getPagesMetaData = (post: any) => {
     description: post.properties.Description.rich_text[0].plain_text,
     date: post.properties.Date.date.start,
     slug: post.properties.Slug.rich_text[0].plain_text,
-    // tags: post.properties.Tag.multi_select,
     tags: getTags(post.properties.Tag.multi_select),
   };
 };
