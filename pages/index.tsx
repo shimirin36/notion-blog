@@ -1,7 +1,6 @@
 import SinglePost from "@/components/Post/SinglePost";
 import { getAllPosts } from "@/lib/notionAPI";
 import Head from "next/head";
-import { Key } from "react";
 
 export const getStaticProps = async () => {
   const allPosts = await getAllPosts();
