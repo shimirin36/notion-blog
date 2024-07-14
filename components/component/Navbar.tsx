@@ -12,7 +12,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="container mx-auto lg:px-2 px-2 lg:w-2/5">
+    <nav className="container mx-auto lg:px-2 px-2 lg:w-2/3">
       <div className="container flex items-center justify-between mx-auto">
         <Link href="/" className="text-2x font-medium px-4 py-4 my-3">
           432 Production
@@ -71,21 +71,21 @@ const Navbar = () => {
               className="w-6 h-6 px-3 py-2 hover:cursor-pointer"
             />
             <Link
-              className="block px-4 py-4 hover:text-gray-100 hover:bg-neutral-500 transition-all duration-300 rounded-lg"
+              className="block px-4 py-4 hover:text-gray-100 hover:bg-neutral-500 transition-all duration-300 rounded-lg mt-2"
               href={"/"}
               onClick={toggleMenu}
             >
               Home
             </Link>
             <Link
-              className="block px-4 py-4 hover:text-gray-100 hover:bg-sky-900 transition-all duration-300 rounded-lg"
+              className="block px-4 py-4 hover:text-gray-100 hover:bg-sky-900 transition-all duration-300 rounded-lg mt-2"
               href={"https://x.com/MasterHand36"}
             >
               Twitter[X]
             </Link>
             <Link
               href={"#"}
-              className="block px-4 py-4 hover:text-gray-100 hover:bg-pink-900 transition-all duration-300 rounded-lg"
+              className="block px-4 py-4 hover:text-gray-100 hover:bg-pink-900 transition-all duration-300 rounded-lg mt-2"
               onClick={toggleMenu}
             >
               Contact
