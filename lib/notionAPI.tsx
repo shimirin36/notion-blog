@@ -1,3 +1,4 @@
+import { NUMBER_OF_POST_PER_PAGE } from "@/constants/constants";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md/build/notion-to-md";
 
@@ -20,6 +21,7 @@ export const getAllPosts = async () => {
   });
 };
 
+// 記事のMetaData取得
 const getPagesMetaData = (
   post: any
 ): {
@@ -66,4 +68,27 @@ export const getSinglePost = async (slug: string) => {
   const mdBlocks = await n2m.pageToMarkdown(page.id);
   const mdString = n2m.toMarkdownString(mdBlocks);
   return { metadata, markdown: mdString };
+};
+
+// TOPページ用記事の取得
+export const getPostsApperance = async (pageSize: number) => {
+  const allPosts = await getAllPosts();
+  const appearancePosts = allPosts.slice(0, pageSize);
+  return appearancePosts;
+};
+
+// page番号に応じた記事の情報の取得
+export const getPostByPage = async (page: number) => {
+  const allPosts = await getAllPosts();
+  const startIndex = (page - 1) * NUMBER_OF_POST_PER_PAGE;
+  const endIndex = startIndex + NUMBER_OF_POST_PER_PAGE;
+  return allPosts.slice(startIndex, endIndex);
+};
+
+export const getNumberOfPages = async () => {
+  const allPosts = await getAllPosts();
+  return (
+    Math.floor(allPosts.length / NUMBER_OF_POST_PER_PAGE) +
+    (allPosts.length % NUMBER_OF_POST_PER_PAGE > 0 ? 1 : 0)
+  );
 };

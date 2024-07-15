@@ -1,9 +1,11 @@
 import SinglePost from "@/components/Post/SinglePost";
-import { getAllPosts } from "@/lib/notionAPI";
+import { getAllPosts, getPostsApperance } from "@/lib/notionAPI";
+import { GetStaticProps } from "next";
 import Head from "next/head";
+import Link from "next/link";
 
 type AllPosts = {
-  allPosts: {
+  appearancePosts: {
     id: string;
     title: string;
     description: string;
@@ -13,17 +15,17 @@ type AllPosts = {
   }[];
 };
 
-export const getStaticProps = async () => {
-  const allPosts = await getAllPosts();
+export const getStaticProps: GetStaticProps = async () => {
+  const appearancePosts = await getPostsApperance(6);
   return {
     props: {
-      allPosts: allPosts,
+      appearancePosts,
     },
     revalidate: 60 * 60,
   };
 };
 
-export default function Home({ allPosts }: AllPosts) {
+export default function Home({ appearancePosts }: AllPosts) {
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
@@ -33,7 +35,7 @@ export default function Home({ allPosts }: AllPosts) {
       </Head>
       <main className="container w-full mt-10">
         <h1 className="text-5xl font-medium text-center mb-16">Notion Blog🚀</h1>
-        {allPosts.map(
+        {appearancePosts.map(
           (post: {
             id: string;
             title: string;
@@ -50,10 +52,17 @@ export default function Home({ allPosts }: AllPosts) {
                 date={post.date}
                 slug={post.slug}
                 tags={post.tags}
+                isPaginationPage={false}
               />
             </div>
           )
         )}
+        <Link
+          href="/posts/page/1"
+          className="mb-10 lg:w-2/3 block mx-auto  px-5 py-5 hover:text-sky-800 text-right justify-normal"
+        >
+          ...More
+        </Link>
       </main>
     </div>
   );
