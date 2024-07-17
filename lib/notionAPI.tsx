@@ -92,3 +92,32 @@ export const getNumberOfPages = async () => {
     (allPosts.length % NUMBER_OF_POST_PER_PAGE > 0 ? 1 : 0)
   );
 };
+
+export const getPostsByTag = async (tagName: string, page: number) => {
+  const allPosts = await getAllPosts();
+  const posts = allPosts.filter((post) =>
+    post.tags.find((tag: string) => tag == tagName)
+  );
+
+  const startIndex = (page - 1) * NUMBER_OF_POST_PER_PAGE;
+  const endIndex = startIndex + NUMBER_OF_POST_PER_PAGE;
+  return posts.slice(startIndex, endIndex);
+};
+
+export const getAllTags = async () => {
+  const allPosts = await getAllPosts();
+  const noneDuplicationTags = allPosts.flatMap((post) => post.tags);
+  const allTagList = [...new Set(noneDuplicationTags)];
+  return allTagList;
+};
+
+export const getNumberOfPagesByTag = async (tagName: string) => {
+  const allPosts = await getAllPosts();
+  const posts = allPosts.filter((post) =>
+    post.tags.find((tag: string) => tag == tagName)
+  );
+  return (
+    Math.floor(posts.length / NUMBER_OF_POST_PER_PAGE) +
+    (posts.length % NUMBER_OF_POST_PER_PAGE > 0 ? 1 : 0)
+  );
+};
