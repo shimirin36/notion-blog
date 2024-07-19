@@ -1,11 +1,6 @@
 import Pagination from "@/components/Pagination/Pagination";
 import SinglePost from "@/components/Post/SinglePost";
-import {
-  getAllPosts,
-  getNumberOfPages,
-  getPostByPage,
-  getPostsApperance,
-} from "@/lib/notionAPI";
+import { getNumberOfPages, getPostByPage } from "@/lib/notionAPI";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 

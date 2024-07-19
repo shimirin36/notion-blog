@@ -19,15 +19,7 @@ const Pagination = (props: Props) => {
         {pages.map((page, index) => (
           <li key={index} className="bg-sky-900 rounded-lg w-6 h-8 relative ">
             <Link
-              href={
-                tag
-                  ? {
-                      query: { tag: tag, page: page },
-                    }
-                  : {
-                      query: { page: page },
-                    }
-              }
+              href={tag ? `/posts/tag/${tag}/page/${page}` : `/posts/page/${page}`}
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-300"
             >
               {page}

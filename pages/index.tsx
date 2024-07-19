@@ -1,5 +1,6 @@
 import SinglePost from "@/components/Post/SinglePost";
-import { getAllPosts, getPostsApperance } from "@/lib/notionAPI";
+import Tag from "@/components/Tag/Tag";
+import { getAllPosts, getAllTags, getPostsApperance } from "@/lib/notionAPI";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -13,19 +14,23 @@ type AllPosts = {
     slug: string;
     tags: string[];
   }[];
+  allTags: string[];
 };
 
 export const getStaticProps: GetStaticProps = async () => {
   const appearancePosts = await getPostsApperance(6);
+  const allTags = await getAllTags();
+  console.log(allTags);
   return {
     props: {
       appearancePosts,
+      allTags,
     },
     revalidate: 60 * 60,
   };
 };
 
-export default function Home({ appearancePosts }: AllPosts) {
+export default function Home({ appearancePosts, allTags }: AllPosts) {
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
@@ -63,6 +68,7 @@ export default function Home({ appearancePosts }: AllPosts) {
         >
           ...More
         </Link>
+        <Tag tags={allTags} />
       </main>
     </div>
   );
