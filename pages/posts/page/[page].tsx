@@ -48,7 +48,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 const BlogPageList = ({ postsByPage, numberOfPage }: AllPosts) => {
-  console.log(numberOfPage);
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
@@ -73,7 +72,7 @@ const BlogPageList = ({ postsByPage, numberOfPage }: AllPosts) => {
             </div>
           ))}
         </section>
-        <Pagination numberOfPage={numberOfPage} />
+        <Pagination numberOfPage={numberOfPage} tag={""} />
       </main>
     </div>
   );
