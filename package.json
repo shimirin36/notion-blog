@@ -15,7 +15,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@notionhq/client": "^2.2.15",
-    "next": "14.2.4",
+    "next": "^14.2.4",
     "notion-to-md": "^3.1.1",
     "react": "^18",
     "react-dom": "^18",
