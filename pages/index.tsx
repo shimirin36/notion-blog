@@ -25,7 +25,7 @@ export const getStaticProps: GetStaticProps = async () => {
       appearancePosts,
       allTags,
     },
-    revalidate: 60 * 60,
+    revalidate: 30,
   };
 };
 
