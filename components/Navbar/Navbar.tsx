@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Link from "next/link";
 import React, { useState } from "react";
-import ToggleButton from "../ToggleButton/Toggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

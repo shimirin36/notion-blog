@@ -1,6 +1,7 @@
 import { getAllPosts, getSinglePost } from "@/lib/notionAPI";
 import Link from "next/link";
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
@@ -13,6 +14,7 @@ type Params = {
 
 type PostInfo = {
   post: {
+    markdown: any;
     metadata: {
       id: string;
       title: string;
@@ -60,19 +62,15 @@ const Post = ({ post }: PostInfo) => {
         </p>
       ))}
       <div className="mt-10 font-medium">
-        <Markdown
+        <ReactMarkdown
           components={{
             code(props) {
-              const { children, className, node, ...rest } = props;
+              const { children, className } = props;
               const match = /language-(\w+)/.exec(className || "");
               return match ? (
-                <SyntaxHighlighter
-                  {...rest}
-                  PreTag="div"
-                  children={String(children).replace(/\n$/, "")}
-                  language={match[1]}
-                  style={coldarkDark}
-                />
+                <SyntaxHighlighter PreTag="div" language={match[1]} style={coldarkDark}>
+                  {String(children).replace(/\n$/, "")}
+                </SyntaxHighlighter>
               ) : (
                 <code>{children}</code>
               );
@@ -80,7 +78,7 @@ const Post = ({ post }: PostInfo) => {
           }}
         >
           {post.markdown.parent}
-        </Markdown>
+        </ReactMarkdown>
         <Link href={"/"}>
           <div className="pb-20 inline-block mt-7 hover:text-sky-700 ">←back</div>
         </Link>
