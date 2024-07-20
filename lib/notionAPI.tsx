@@ -1,7 +1,6 @@
 import { NUMBER_OF_POST_PER_PAGE } from "@/constants/constants";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md/build/notion-to-md";
-
 // Initializing a client
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -9,11 +8,23 @@ const notion = new Client({
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
-// 全記事取得（100件）
+// 全記事取得
 export const getAllPosts = async () => {
   const posts = await notion.databases.query({
     database_id: `${process.env.NOTION_DB_ID}`,
     page_size: 100,
+    filter: {
+      property: "Published",
+      checkbox: {
+        equals: true,
+      },
+    },
+    sorts: [
+      {
+        property: "Date",
+        direction: "descending",
+      },
+    ],
   });
   const allPosts = posts.results;
   return allPosts.map((post) => {
@@ -85,6 +96,7 @@ export const getPostByPage = async (page: number) => {
   return allPosts.slice(startIndex, endIndex);
 };
 
+// ページ数の取得
 export const getNumberOfPages = async () => {
   const allPosts = await getAllPosts();
   return (
@@ -93,6 +105,7 @@ export const getNumberOfPages = async () => {
   );
 };
 
+// タグで絞り込んだページ数と表示する投稿を取得
 export const getPostsByTag = async (tagName: string, page: number) => {
   const allPosts = await getAllPosts();
   const posts = allPosts.filter((post) =>
@@ -104,6 +117,7 @@ export const getPostsByTag = async (tagName: string, page: number) => {
   return posts.slice(startIndex, endIndex);
 };
 
+// 全てのタグを取得
 export const getAllTags = async () => {
   const allPosts = await getAllPosts();
   const noneDuplicationTags = allPosts.flatMap((post) => post.tags);
@@ -111,6 +125,7 @@ export const getAllTags = async () => {
   return allTagList;
 };
 
+// タグで絞り込んだページ数を取得
 export const getNumberOfPagesByTag = async (tagName: string) => {
   const allPosts = await getAllPosts();
   const posts = allPosts.filter((post) =>

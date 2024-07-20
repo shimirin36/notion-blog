@@ -1,6 +1,5 @@
 import Link from "next/link";
-import React, { Key, useEffect, useRef, useState } from "react";
-import { isContext } from "vm";
+import React, { useEffect, useRef, useState } from "react";
 
 type Props = {
   id: string;
@@ -16,6 +15,7 @@ const SinglePost = (props: Props) => {
   const { title, description, date, slug, tags, isPaginationPage } = props;
   const [isOverflowing, setIsOverflowing] = useState(false);
   const contentRef = useRef(null);
+  const dateObj = new Date(date);
 
   useEffect(() => {
     const checkOverflow = (element: HTMLDivElement) => {
@@ -65,6 +65,7 @@ const SinglePost = (props: Props) => {
               </Link>
             ))}
           </div>
+          <div className="text-gray-400 max-w-full">{dateObj.toLocaleString()}</div>
           <div className="text-gray-100 truncate max-w-full">{description}</div>
         </section>
       ) : (
@@ -90,6 +91,7 @@ const SinglePost = (props: Props) => {
               </Link>
             ))}
           </div>
+          <div className="text-gray-100 max-w-full">{dateObj.toLocaleString()}</div>
           <div className="text-gray-100 truncate max-w-full">{description}</div>
         </section>
       )}

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Link from "next/link";
 import React, { useState } from "react";
+import ToggleButton from "../ToggleButton/Toggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +18,7 @@ const Navbar = () => {
         <Link href="/" className="text-2x font-medium px-4 py-4 my-3">
           432 Production
         </Link>
+
         <div className="hidden md:block">
           <ul className="flex items-center text-sm gap-1">
             <li>

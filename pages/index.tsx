@@ -1,6 +1,6 @@
 import SinglePost from "@/components/Post/SinglePost";
 import Tag from "@/components/Tag/Tag";
-import { getAllPosts, getAllTags, getPostsApperance } from "@/lib/notionAPI";
+import { getAllTags, getPostsApperance } from "@/lib/notionAPI";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -38,7 +38,7 @@ export default function Home({ appearancePosts, allTags }: AllPosts) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container w-full mt-10">
-        <h1 className="text-5xl font-medium text-center mb-16">Notion Blog🚀</h1>
+        <h1 className="text-5xl font-medium text-center mb-16">432のビボロク🖊📚</h1>
         {appearancePosts.map(
           (post: {
             id: string;

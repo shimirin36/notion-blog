@@ -43,11 +43,13 @@ export const getStaticProps = async ({ params }: Params) => {
 };
 
 const Post = ({ post }: PostInfo) => {
+  const dateObj = new Date(post.metadata.date);
+
   return (
     <section className="container lg:px-2 px-5 h-screen lg:w-2/3 mx-auto mt-10">
       <h2 className="break-words text-3xl font-medium">{post.metadata.title}</h2>
       <div className="border-b-4 w-full border-sky-700"></div>
-      <span className="text-gray-500">投稿日：{post.metadata.date}</span>
+      <span className="text-gray-500">投稿日：{dateObj.toLocaleString()}</span>
       <br />
       {post.metadata.tags.map((tag: string, index: number) => (
         <p
