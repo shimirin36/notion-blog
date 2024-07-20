@@ -74,9 +74,7 @@ const Post = ({ post }: PostInfo) => {
                   style={coldarkDark}
                 />
               ) : (
-                <code {...rest} className={className}>
-                  {children}
-                </code>
+                <code>{children}</code>
               );
             },
           }}
