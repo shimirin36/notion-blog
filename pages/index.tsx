@@ -20,7 +20,6 @@ type AllPosts = {
 export const getStaticProps: GetStaticProps = async () => {
   const appearancePosts = await getPostsApperance(6);
   const allTags = await getAllTags();
-  console.log(allTags);
   return {
     props: {
       appearancePosts,

@@ -17,7 +17,7 @@ const Navbar = () => {
         <Link href="/" className="text-2x font-medium px-4 py-4 my-3">
           432 Production
         </Link>
-        <div className="md:flex hidden">
+        <div className="hidden md:block">
           <ul className="flex items-center text-sm gap-1">
             <li>
               <Link

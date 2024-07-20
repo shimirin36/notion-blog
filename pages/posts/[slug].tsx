@@ -11,6 +11,20 @@ type Params = {
   };
 };
 
+type PostInfo = {
+  post: {
+    metadata: {
+      id: string;
+      title: string;
+      description: string;
+      date: string;
+      slug: string;
+      tags: string[];
+    };
+    slug: string;
+  };
+};
+
 export const getStaticPaths = async () => {
   const allPosts = await getAllPosts();
   const paths = allPosts.map(({ slug }) => ({ params: { slug } }));
@@ -28,19 +42,19 @@ export const getStaticProps = async ({ params }: Params) => {
   };
 };
 
-const Post = ({ post }: any) => {
+const Post = ({ post }: PostInfo) => {
   return (
     <section className="container lg:px-2 px-5 h-screen lg:w-2/3 mx-auto mt-10">
-      <h2 className="w-full text-3xl font-medium">{post.metadata.title}</h2>
-      <div className="border-b-4 w-1/2 border-sky-700"></div>
+      <h2 className="break-words text-3xl font-medium">{post.metadata.title}</h2>
+      <div className="border-b-4 w-full border-sky-700"></div>
       <span className="text-gray-500">投稿日：{post.metadata.date}</span>
       <br />
       {post.metadata.tags.map((tag: string, index: number) => (
         <p
           key={index}
-          className="text-white bg-sky-950 rounded-xl font-medium mt-2 mx-0.5 px-2  inline-block"
+          className="text-white bg-sky-700 rounded-2xl font-medium mt-3 mx-1 px-3 inline-block"
         >
-          {tag}
+          <Link href={`/posts/tag/${tag}/page/1`}>{tag}</Link>
         </p>
       ))}
       <div className="mt-10 font-medium">

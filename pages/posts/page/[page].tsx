@@ -1,6 +1,7 @@
 import Pagination from "@/components/Pagination/Pagination";
 import SinglePost from "@/components/Post/SinglePost";
-import { getNumberOfPages, getPostByPage } from "@/lib/notionAPI";
+import Tag from "@/components/Tag/Tag";
+import { getAllTags, getNumberOfPages, getPostByPage } from "@/lib/notionAPI";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 
@@ -14,6 +15,7 @@ interface AllPosts {
     tags: string[];
   }[];
   numberOfPage: number;
+  allTags: string[];
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -32,17 +34,19 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const currentPage = context.params?.page;
   const postsByPage = await getPostByPage(parseInt(currentPage!.toString(), 10));
   const numberOfPage = await getNumberOfPages();
+  const allTags = await getAllTags();
 
   return {
     props: {
       postsByPage,
       numberOfPage,
+      allTags,
     },
     revalidate: 60 * 60,
   };
 };
 
-const BlogPageList = ({ postsByPage, numberOfPage }: AllPosts) => {
+const BlogPageList = ({ postsByPage, numberOfPage, allTags }: AllPosts) => {
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
@@ -68,6 +72,7 @@ const BlogPageList = ({ postsByPage, numberOfPage }: AllPosts) => {
           ))}
         </section>
         <Pagination numberOfPage={numberOfPage} tag={""} />
+        <Tag tags={allTags} />
       </main>
     </div>
   );

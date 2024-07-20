@@ -28,3 +28,19 @@ h2 {
 h3 {
   font-size: 1.3rem;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 1px;
+  height: 7px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #00000000;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #fffefe;
+  border-radius: 1rem;
+  border: 1px solid #ffffff00;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #b8b8b8;
+}
