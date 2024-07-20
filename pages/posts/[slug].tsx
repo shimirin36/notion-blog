@@ -40,7 +40,7 @@ export const getStaticProps = async ({ params }: Params) => {
   const post = await getSinglePost(params.slug);
   return {
     props: { post },
-    revalidate: 60 * 60,
+    revalidate: 30,
   };
 };
 
