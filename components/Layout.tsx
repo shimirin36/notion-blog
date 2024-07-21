@@ -4,12 +4,12 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
 
-const Layout = ({ children }: any) => {
+const Layout = ({ children, darkMode }: any) => {
   return (
-    <div>
-      <Navbar />
+    <>
+      <Navbar darkMode={darkMode} />
       {children}
-    </div>
+    </>
   );
 };
 

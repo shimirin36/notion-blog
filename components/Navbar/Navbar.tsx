@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React, { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ darkMode }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -61,9 +61,11 @@ const Navbar = () => {
             onClick={toggleMenu}
           ></div>
           <div
-            className={`fixed inset-y-0 right-0 bg-white w-64 transform ${
+            className={`fixed inset-y-0 right-0 w-64 transform ${
               isOpen ? "translate-x-0 " : "translate-x-full"
-            } transition-transform duration-300 ease-in-out z-50 px-2 py-2`}
+            } transition-transform duration-300 ease-in-out z-50 px-2 py-2 ${
+              darkMode ? "dark:bg-gray-900 text-black dark:text-white" : "bg-white"
+            }`}
           >
             <FontAwesomeIcon
               icon={faXmark}
