@@ -5,7 +5,7 @@ import { getAllTags, getNumberOfPages, getPostByPage } from "@/lib/notionAPI";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 
-interface AllPosts {
+type AllPosts = {
   postsByPage: {
     id: string;
     title: string;
@@ -16,7 +16,7 @@ interface AllPosts {
   }[];
   numberOfPage: number;
   allTags: string[];
-}
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const numberOfPage = await getNumberOfPages();

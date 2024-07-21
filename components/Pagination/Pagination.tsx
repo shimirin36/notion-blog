@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React from "react";
 
-interface Props {
+type Props = {
   tag: string;
   numberOfPage: number;
-}
+};
 
 const Pagination = (props: Props) => {
   const { tag, numberOfPage } = props;
