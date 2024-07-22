@@ -55,7 +55,7 @@ const BlogPageList = ({ postsByPage, numberOfPage, allTags }: AllPosts) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container w-full mt-10">
-        <h1 className="text-5xl font-medium text-center mb-16">432のビボロク🖊📚</h1>
+        <h1 className="text-5xl font-medium text-center mb-16">432のビボロク📚</h1>
         <section className="sm:grid grid-cols-2 w-5/6 gap-5 mx-auto">
           {postsByPage.map((post) => (
             <div key={post.id}>
